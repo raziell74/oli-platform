@@ -3,3 +3,4 @@
 coverage
 dist
 husky
+**/*.md
