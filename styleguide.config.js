@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   title: 'Oli - Style Guide',
+  ignore: ['src/components/**/index.{js, jsx, ts, tsx}'],
   getComponentPathLine(componentPath) {
     const name = path.basename(componentPath, '.tsx');
     return `import { ${name} } from '${componentPath.replace(/\.[^/.]+$/, '')}';`;

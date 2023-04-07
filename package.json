@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "styleguide": "npx styleguidist server",
+    "styleguide": "styleguidist server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

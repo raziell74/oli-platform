@@ -1,7 +1,13 @@
-import React, { FunctionComponent } from 'react';
+import React from 'react';
 import { Button as MUIButton, ButtonProps } from '@mui/material';
 
-const Button: FunctionComponent<ButtonProps> = ({ children, ...props }) => {
+/**
+ * OLI Styled MUI Button
+ *
+ * @author Jordan Richmeier
+ * @returns ReactNode
+ */
+const Button = ({ children, ...props }: ButtonProps) => {
   return <MUIButton {...props}>{children}</MUIButton>;
 };
 
