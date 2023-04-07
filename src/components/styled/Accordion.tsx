@@ -42,7 +42,9 @@ interface AccordionSection extends MuiAccordionProps {
   expandIcon?: ReactNode;
 }
 
-type AccordionProps = { sections: [AccordionSection] };
+type AccordionProps = {
+  sections: [AccordionSection];
+};
 
 /**
  * OLI Styled Accordion

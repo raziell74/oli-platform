@@ -19,7 +19,7 @@
       "rsg-components/*": ["./node_modules/react-styleguidist/lib/client/rsg-components/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "styleguide/components/Wrapper.tsx"],
   "exclude": ["node_modules"],
   "types": ["./node_modules/@types/"]
 }

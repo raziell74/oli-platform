@@ -6,7 +6,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import { ThemeProvider } from '@mui/material/styles';
-import { lightTheme } from '../theme';
+import { lightTheme } from '../../theme';
 import CssBaseline from '@mui/material/CssBaseline';
 
 type MuiThemeWrapperWithChildren = {
