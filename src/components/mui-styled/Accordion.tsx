@@ -43,7 +43,7 @@ interface AccordionSection extends MuiAccordionProps {
 }
 
 type AccordionProps = {
-  sections: [AccordionSection];
+  sections: AccordionSection[];
 };
 
 /**
@@ -57,11 +57,16 @@ const Accordion = ({ sections }: AccordionProps) => {
   return (
     <>
       {sections.map(({ id, sectionTitle, sectionContent, expandIcon, ...props }, index) => (
-        <MuiStyledAccordion {...props}>
+        <MuiStyledAccordion
+          {...props}
+          key={`accordion-index-${index}`}
+          data-testid={`${id}-accordion`}
+        >
           <AccordionSummary
             expandIcon={expandIcon ?? null}
             aria-controls={`${id}-panel${index}-content`}
             id={`${id}-panel${index}-header`}
+            data-testid={`${id}-accordion-summary`}
           >
             {sectionTitle}
           </AccordionSummary>

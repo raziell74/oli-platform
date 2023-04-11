@@ -20,7 +20,7 @@
       "rsg-lib/*": ["./node_modules/react-styleguidist/lib/*"]
     }
   },
-  "include": ["src", "styleguide/components/Wrapper.tsx"],
+  "include": ["src", "styleguide/components/Wrapper.tsx", "src/containers/App.test.tsx"],
   "exclude": ["node_modules"],
   "types": ["./node_modules/@types/"]
 }

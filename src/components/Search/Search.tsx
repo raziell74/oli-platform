@@ -16,9 +16,9 @@ interface SearchProps extends InputBaseProps {
  */
 const Search = ({ action, sx, ...props }: SearchProps) => {
   return (
-    <SearchWrapper sx={sx}>
-      <SearchIconWrapper>
-        <SearchIcon />
+    <SearchWrapper sx={sx} data-testid="search-wrapper">
+      <SearchIconWrapper data-testid="search-icon-wrapper">
+        <SearchIcon data-testid="search-icon" />
       </SearchIconWrapper>
       <StyledInputBase {...props} />
     </SearchWrapper>

@@ -27,7 +27,8 @@
     "start": "react-scripts start",
     "styleguide": "styleguidist server --config ./styleguide.config.js",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --verbose --passWithNoTests --color --coverage --watchAll",
+    "test:staged": "cross-env CI=true react-scripts test --env=jsdom --verbose --passWithNoTests --color --coverage --collectCoverageFrom --coverageReporters=text-summary --findRelatedTests",
     "eject": "react-scripts eject",
     "lint": "eslint \"**/*.*(js|jsx|ts|tsx)\" --max-warnings 0 --color --format stylish",
     "lint:fix": "eslint \"**/*.*(js|jsx|ts|tsx)\" --max-warnings 0 --color --fix --format stylish",
@@ -62,13 +63,38 @@
     "react-docgen-typescript": "^2.2.2",
     "react-styleguidist": "^13.1.1"
   },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 90,
+        "statements": 90
+      }
+    },
+    "collectCoverageFrom": [
+      "src/**/*.tsx",
+      "src/**/*.ts",
+      "!**/node_modules/**",
+      "!**/styleguide/**",
+      "!**/types/**",
+      "!**/types.ts",
+      "!**/types.tsx",
+      "!src/react-app-env.d.ts",
+      "!src/reportWebVitals.ts",
+      "!src/setupTests.ts",
+      "!src/**/index.tsx",
+      "!src/**/index.ts"
+    ]
+  },
   "lint-staged": {
     "**/*.{json,css,scss}": [
       "pretty-quick --verbose --list-different"
     ],
     "**/*.{js,jsx,ts,tsx}": [
       "pretty-quick  --verbose --list-different",
-      "eslint --max-warnings 0 --fix --color --format stylish"
+      "eslint --max-warnings 0 --fix --color --format stylish",
+      "react-scripts test --watchAll=false --verbose --passWithNoTests --color --coverage --collectCoverageFrom --findRelatedTests"
     ]
   }
 }
