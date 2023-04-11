@@ -14,7 +14,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "paths": {
+      "rsg-components/*": ["./node_modules/react-styleguidist/lib/client/rsg-components/*"],
+      "rsg-lib/*": ["./node_modules/react-styleguidist/lib/*"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "styleguide/components/Wrapper.tsx", "src/containers/App.test.tsx"],
+  "exclude": ["node_modules"],
+  "types": ["./node_modules/@types/"]
 }
