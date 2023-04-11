@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   title: 'Oli - Style Guide',
-  ignore: ['src/components/**/index.{js, jsx, ts, tsx}'],
+  ignore: ['src/components/**/index.{js, jsx, ts, tsx}', 'src/**/*.test.{ts, tsx}'],
   skipComponentsWithoutExample: true,
   sections: [
     {
@@ -27,7 +27,7 @@ module.exports = {
       name: 'UI Components',
       content: 'docs/oli-ui.md',
       components: 'src/components/**/*.tsx',
-      ignore: ['src/components/mui-styled/*.*', '**/index.*'],
+      ignore: ['src/components/mui-styled/*.*', '**/index.*', '**/*.test.*'],
       exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
       usageMode: 'collapse', // 'hide' | 'collapse' | 'expand'
     },
@@ -35,7 +35,7 @@ module.exports = {
       name: 'Material UI',
       content: 'docs/mui.md',
       components: 'src/components/mui-styled/*.tsx',
-      ignore: ['src/components/mui-styled/index.js', '**/index.*'],
+      ignore: ['src/components/mui-styled/index.js', '**/index.*', '**/*.test.*'],
       exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
       usageMode: 'collapse', // 'hide' | 'collapse' | 'expand'
     },
