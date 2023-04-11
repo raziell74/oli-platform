@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   title: 'Oli - Style Guide',
   ignore: ['src/components/**/index.{js, jsx, ts, tsx}'],
+  skipComponentsWithoutExample: true,
   sections: [
     {
       name: 'Getting Started',
@@ -23,18 +24,18 @@ module.exports = {
       ],
     },
     {
-      name: 'Material UI',
-      content: 'docs/mui.md',
-      components: 'src/components/styled/*.tsx',
-      ignore: ['src/components/styled/index.js'],
+      name: 'UI Components',
+      content: 'docs/oli-ui.md',
+      components: 'src/components/**/*.tsx',
+      ignore: ['src/components/mui-styled/*.*', '**/index.*'],
       exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
       usageMode: 'collapse', // 'hide' | 'collapse' | 'expand'
     },
     {
-      name: 'UI Components',
-      content: 'docs/oli-ui.md',
-      components: 'src/components/**/*.tsx',
-      ignore: ['src/components/styled/*.*', 'src/components/**/index.{js, jsx, ts, tsx}'],
+      name: 'Material UI',
+      content: 'docs/mui.md',
+      components: 'src/components/mui-styled/*.tsx',
+      ignore: ['src/components/mui-styled/index.js', '**/index.*'],
       exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
       usageMode: 'collapse', // 'hide' | 'collapse' | 'expand'
     },
@@ -73,6 +74,8 @@ module.exports = {
   // Override Styleguidist components
   styleguideComponents: {
     LogoRenderer: path.join(__dirname, 'src/styleguide/components/Logo'),
+    // SectionsRenderer: path.join(__dirname, 'src/styleguide/components/StyleGuideRenderer'),
+    // StyleGuideRenderer: path.join(__dirname, 'src/styleguide/components/StyleGuideRenderer'),
     Wrapper: path.join(__dirname, 'src/styleguide/components/Wrapper'),
   },
   propsParser: (filePath, source, resolver, handlers) => {

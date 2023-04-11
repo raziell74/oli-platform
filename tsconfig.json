@@ -16,7 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "rsg-components/*": ["./node_modules/react-styleguidist/lib/client/rsg-components/*"]
+      "rsg-components/*": ["./node_modules/react-styleguidist/lib/client/rsg-components/*"],
+      "rsg-lib/*": ["./node_modules/react-styleguidist/lib/*"]
     }
   },
   "include": ["src", "styleguide/components/Wrapper.tsx"],

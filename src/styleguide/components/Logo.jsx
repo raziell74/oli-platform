@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Styled from 'rsg-components/Styled';
 import logo from './logo.svg';
 
-const styles = ({ fontFamily, color }) => ({
+const styles = ({ fontFamily }) => ({
   logo: {
     display: 'flex',
     alignItems: 'center',
@@ -11,7 +11,7 @@ const styles = ({ fontFamily, color }) => ({
     fontFamily: fontFamily.base,
     fontSize: 18,
     fontWeight: 'normal',
-    color: color.baseBackground,
+    color: '#6e6e6e',
   },
   image: {
     width: '2.5em',
