@@ -10,7 +10,7 @@ export const lightTheme = createTheme({
       main: '#1976d2',
     },
     background: {
-      paper: '#e2e2e2',
+      paper: '#f7f7f7',
       default: '#d2d2d2',
     },
     warning: {
