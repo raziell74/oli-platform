@@ -9,14 +9,7 @@ describe('LoginForm Component', () => {
   const onSignUp = jest.fn();
 
   test('renders LoginForm with hero image', () => {
-    render(
-      <LoginForm
-        hero={heroImageUrl}
-        onSubmit={onSubmit}
-        onForgotPassword={onForgotPassword}
-        onSignUp={onSignUp}
-      />
-    );
+    render(<LoginForm hero={heroImageUrl} onSubmit={onSubmit} />);
 
     const loginHero = screen.getByTestId('login-hero');
     expect(loginHero).toBeInTheDocument();
@@ -33,14 +26,14 @@ describe('LoginForm Component', () => {
   });
 
   test('toggling the "Remember me" checkbox updates its state', () => {
-    render(<LoginForm />);
+    render(<LoginForm onSubmit={onSubmit} />);
 
     fireEvent.click(screen.getByTestId('remember-me'));
     expect(screen.getByTestId('remember-me').querySelector('input')).toBeChecked();
   });
 
   test('clicking "Forgot password?" calls the onForgotPassword callback', () => {
-    render(<LoginForm onForgotPassword={onForgotPassword} />);
+    render(<LoginForm onSubmit={onSubmit} onForgotPassword={onForgotPassword} />);
 
     fireEvent.click(screen.getByTestId('forgot-password'));
 
@@ -48,7 +41,7 @@ describe('LoginForm Component', () => {
   });
 
   test('clicking "Sign Up" calls the onSignUp callback', () => {
-    render(<LoginForm onSignUp={onSignUp} />);
+    render(<LoginForm onSubmit={onSubmit} onSignUp={onSignUp} />);
 
     fireEvent.click(screen.getByTestId('sign-up'));
 
