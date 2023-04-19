@@ -27,7 +27,7 @@
     "start": "react-scripts start",
     "styleguide": "styleguidist server --config ./styleguide.config.js",
     "build": "react-scripts build",
-    "test": "react-scripts test --verbose --passWithNoTests --color --coverage --watchAll",
+    "test": "react-scripts test --verbose --color --coverage --watchAll",
     "test:staged": "cross-env CI=true react-scripts test --env=jsdom --verbose --passWithNoTests --color --coverage --collectCoverageFrom --coverageReporters=text-summary --findRelatedTests",
     "eject": "react-scripts eject",
     "lint": "eslint \"**/*.*(js|jsx|ts|tsx)\" --max-warnings 0 --color --format stylish",
@@ -39,7 +39,10 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
+    ],
+    "rules": {
+      "testing-library/no-node-access": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -94,7 +97,7 @@
     "**/*.{js,jsx,ts,tsx}": [
       "pretty-quick  --verbose --list-different",
       "eslint --max-warnings 0 --fix --color --format stylish",
-      "react-scripts test --watchAll=false --verbose --passWithNoTests --color --coverage --collectCoverageFrom --findRelatedTests"
+      "react-scripts test --watchAll=false --verbose --color --coverage --collectCoverageFrom --findRelatedTests"
     ]
   }
 }
