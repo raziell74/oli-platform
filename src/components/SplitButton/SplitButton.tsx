@@ -58,7 +58,9 @@ const SplitButton = ({ options, disabled, onClick }: SplitButtonPropMap) => {
   return (
     <>
       <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
-        <Button onClick={handleClick}>{options[selectedIndex]}</Button>
+        <Button data-testid="sb-button" onClick={handleClick}>
+          {options[selectedIndex]}
+        </Button>
         <Button
           size="small"
           aria-controls={open ? 'split-button-menu' : undefined}
@@ -66,6 +68,7 @@ const SplitButton = ({ options, disabled, onClick }: SplitButtonPropMap) => {
           aria-label="select merge strategy"
           aria-haspopup="menu"
           onClick={handleToggle}
+          data-testid="sb-dropdown"
         >
           <ArrowDropDownIcon />
         </Button>
@@ -90,6 +93,7 @@ const SplitButton = ({ options, disabled, onClick }: SplitButtonPropMap) => {
                 <MenuList id="split-button-menu" autoFocusItem>
                   {options.map((option, index) => (
                     <MenuItem
+                      data-testid={`sb-menu-item-${index}`}
                       key={option}
                       disabled={disabled?.includes(option)}
                       selected={index === selectedIndex}
