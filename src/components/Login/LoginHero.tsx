@@ -3,8 +3,6 @@ import { styled } from '@mui/material/styles';
 
 const Main = styled('main')(({ theme }) => ({
   backgroundRepeat: 'no-repeat',
-  backgroundColor:
-    theme.palette.mode === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   width: '100%',
@@ -32,7 +30,9 @@ const LoginHero = ({ image, gradient }: LoginHeroMap) => {
     gradientOverlay = gradient ? `${gradient}` : 'linear-gradient(to left, #f5f6fc85, #ff600066)';
   }
 
-  return <Main sx={{ backgroundImage: `${gradientOverlay},url('${image}')` }} />;
+  return (
+    <Main data-testid="login-hero" sx={{ backgroundImage: `${gradientOverlay},url('${image}')` }} />
+  );
 };
 
 export default LoginHero;

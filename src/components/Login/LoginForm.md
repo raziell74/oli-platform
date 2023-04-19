@@ -1,11 +1,23 @@
-**_Example:_**
-
 ```tsx
-<LoginForm onSubmit={(event) => { event.preventDefault(); alert('clicked') }} />
+<LoginForm 
+  onSubmit={(username, password, remember, event) => {
+    alert(`Logging in with\nuser: ${username}\npassword: ${password}\nRemember user? ${remember ? 'Yup' : 'Nope'}`);
+    return true;
+  }}
+  autoFocus={false} // Remove this when using in an application
+/>
 ```
 
-**_Example With Hero Image:_**
+##### With Hero Image
 
 ```tsx
-<LoginForm hero="https://cdn.midjourney.com/48079d4f-6d07-4975-b69e-2faca1d23a55/grid_0.png" />
+<LoginForm 
+  header="Inspector Sign in"
+  hero="/images/insp_login_hero.png"
+  onSubmit={(username, password, remember) => {
+    alert(`Logging in with\nuser: ${username}\npassword: ${password}\nRemember user? ${remember ? 'Yup' : 'Nope'}`);
+    return true;
+  }}
+  autoFocus={false} // Remove this when using in an application
+/>
 ```

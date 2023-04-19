@@ -1,7 +1,8 @@
-**_Variants:_**
+### Variants
 
 ```tsx
 import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 <Stack spacing={2} direction="row">
   <Button variant="text">Text</Button>
@@ -10,10 +11,11 @@ import Stack from '@mui/material/Stack';
 </Stack>
 ```
 
-**_Coloring_**
+### Coloring
 
 ```tsx
 import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 <Stack spacing={2} direction="row">
   <Button variant="outlined">Primary</Button>
@@ -23,10 +25,11 @@ import Stack from '@mui/material/Stack';
 </Stack>
 ```
 
-**_Sizes_**
+### Sizes
 
 ```tsx
 import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 <>
   <Stack spacing={2} direction="row">
@@ -49,10 +52,11 @@ import Stack from '@mui/material/Stack';
 </>
 ```
 
-**_With Icons_**
+### Button Icons
 
 ```tsx
 import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 

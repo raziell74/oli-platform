@@ -3,7 +3,7 @@ import InputBase from '@mui/material/InputBase';
 
 export const SearchWrapper = styled('div')(({ theme }) => ({
   position: 'relative',
-  borderWidth: 1,
+  borderWidth: 2,
   borderStyle: 'solid',
   borderColor: alpha(theme.palette.text.primary, 0.15),
   borderRadius: theme.shape.borderRadius,
@@ -11,7 +11,7 @@ export const SearchWrapper = styled('div')(({ theme }) => ({
   transition: theme.transitions.create(['background-color', 'border-color']),
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
-    borderColor: alpha(theme.palette.text.primary, 0.25),
+    borderColor: alpha(theme.palette.text.primary, 0.42),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,

@@ -1,5 +1,5 @@
 import { Palette, TypographyVariants } from '@mui/material/styles';
-import { lightTheme, darkTheme } from './theme';
+import theme from './theme.light';
 
 describe('Theme', () => {
   const checkPalette = (palette: Palette) => {
@@ -16,17 +16,10 @@ describe('Theme', () => {
     expect(typography).toHaveProperty('fontFamily');
   };
 
-  describe('lightTheme', () => {
+  describe('theme.light', () => {
     test('has the correct palette and typography properties', () => {
-      checkPalette(lightTheme.palette);
-      checkTypography(lightTheme.typography);
-    });
-  });
-
-  describe('darkTheme', () => {
-    test('has the correct palette and typography properties', () => {
-      checkPalette(darkTheme.palette);
-      checkTypography(darkTheme.typography);
+      checkPalette(theme.palette);
+      checkTypography(theme.typography);
     });
   });
 });

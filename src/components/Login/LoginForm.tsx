@@ -16,6 +16,12 @@ import Copyright from '../Copyright';
 
 type LoginFormPropMap = {
   /**
+   * Form Header Text
+   * @default "Sign in"
+   */
+  header?: string;
+
+  /**
    * URL for the hero image asset
    * @default none
    */
@@ -30,12 +36,12 @@ type LoginFormPropMap = {
   /**
    * Form Submission Callback
    */
-  onSubmit?: (
+  onSubmit: (
     username: string,
     password: string,
     remember?: boolean,
     event?: React.FormEvent
-  ) => boolean;
+  ) => void;
 
   /**
    * Forgot Password Callback
@@ -46,22 +52,30 @@ type LoginFormPropMap = {
    * Sign Up Callback
    */
   onSignUp?: React.MouseEventHandler<HTMLAnchorElement>;
+
+  /**
+   * Allow the auto-focus for the username element on page load
+   * @default true
+   */
+  autoFocus?: boolean;
 };
 
 const LoginForm: FunctionComponent<LoginFormPropMap> = ({
+  header,
   hero,
   heroGradient,
   onSubmit,
   onForgotPassword,
   onSignUp,
+  autoFocus,
 }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+  const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    return onSubmit ? onSubmit(username, password, remember, event) : false;
+    onSubmit(username, password, remember, event);
   };
 
   return (
@@ -88,17 +102,24 @@ const LoginForm: FunctionComponent<LoginFormPropMap> = ({
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            {header || 'Sign in'}
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            data-testid="login-form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
               fullWidth
               id="username"
+              inputProps={{ 'data-testid': 'username' }}
               label="Username or Email"
               name="username"
-              autoFocus
+              autoFocus={autoFocus !== false}
               value={username}
               onChange={({ target: { value } }) => setUsername(value)}
             />
@@ -110,6 +131,7 @@ const LoginForm: FunctionComponent<LoginFormPropMap> = ({
               label="Password"
               type="password"
               id="password"
+              inputProps={{ 'data-testid': 'password' }}
               autoComplete="current-password"
               value={password}
               onChange={({ target: { value } }) => setPassword(value)}
@@ -118,6 +140,7 @@ const LoginForm: FunctionComponent<LoginFormPropMap> = ({
               control={
                 <Checkbox
                   value="remember"
+                  data-testid="remember-me"
                   color="primary"
                   checked={remember}
                   onChange={({ target: { checked } }) => setRemember(checked)}
@@ -125,18 +148,29 @@ const LoginForm: FunctionComponent<LoginFormPropMap> = ({
               }
               label="Remember me"
             />
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button
+              type="submit"
+              data-testid="sign-in-button"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" onClick={onForgotPassword}>
+                <Link
+                  href="#"
+                  variant="body2"
+                  data-testid="forgot-password"
+                  onClick={onForgotPassword}
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" onClick={onSignUp}>
-                  {"Don't have an account? Sign Up"}
+                <Link href="#" variant="body2" data-testid="sign-up" onClick={onSignUp}>
+                  {"Don't have an account?"}
                 </Link>
               </Grid>
             </Grid>

@@ -1,5 +1,3 @@
-**_Examples:_**
-
 ```tsx
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -10,7 +8,7 @@ import Paper from '@mui/material/Paper';
     '& > :not(style)': { m: 1, p: 2 },
   }}
 >
-  <Paper sx={{ backgroundColor: "#5c5c5c", color: "#FFF" }}>
+  <Paper sx={{ background: "#5c5c5c", color: "#FFF" }}>
     <Search placeholder="Search" />
   </Paper>
 

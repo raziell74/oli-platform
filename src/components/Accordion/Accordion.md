@@ -1,5 +1,3 @@
-**_Example:_**
-
 ```tsx
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
