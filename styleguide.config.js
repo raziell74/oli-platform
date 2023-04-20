@@ -33,11 +33,27 @@ module.exports = {
     },
     {
       name: 'Material UI',
-      content: 'docs/mui.md',
-      components: 'src/components/mui-styled/*.tsx',
-      ignore: ['src/components/mui-styled/index.js', '**/index.*', '**/*.test.*'],
-      exampleMode: 'collapse', // 'hide' | 'collapse' | 'expand'
-      usageMode: 'collapse', // 'hide' | 'collapse' | 'expand'
+      content: 'docs//material-ui/mui.md',
+      sections: [
+        {
+          name: 'Button',
+          content: 'docs/material-ui/Button.md',
+          description:
+            'Buttons allow users to take actions, and make choices, with a single tap. [Documentation](https://mui.com/material-ui/react-button/)',
+        },
+        {
+          name: 'Button Group',
+          content: 'docs/material-ui/ButtonGroup.md',
+          description:
+            'The ButtonGroup component can be used to group related buttons. [Documentation](https://mui.com/material-ui/react-button-group/)',
+        },
+        {
+          name: 'Floating Action Button',
+          content: 'docs/material-ui/FAB.md',
+          description:
+            'A Floating Action Button (FAB) performs the primary, or most common, action on a screen. [Documentation](https://mui.com/material-ui/react-floating-action-button/)',
+        },
+      ],
     },
   ],
   theme: {
