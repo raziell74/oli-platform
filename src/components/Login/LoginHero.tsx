@@ -9,7 +9,7 @@ const Main = styled('main')(({ theme }) => ({
   height: '100%',
 }));
 
-type LoginHeroMap = {
+type LoginHeroPropMap = {
   /**
    * @description url for the hero image asset
    */
@@ -22,7 +22,7 @@ type LoginHeroMap = {
   gradient?: string | boolean;
 };
 
-const LoginHero = ({ image, gradient }: LoginHeroMap) => {
+const LoginHero = ({ image, gradient }: LoginHeroPropMap) => {
   if (!image) return <></>;
 
   let gradientOverlay: string = 'linear-gradient(to left, #ffffff00, #ffffff00)';
