@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import { useForm, Controller, FormProvider, FieldValues } from 'react-hook-form';
 
 import LoginHero from './LoginHero';
 import Copyright from '../Copyright';
@@ -36,12 +37,7 @@ type LoginFormPropMap = {
   /**
    * Form Submission Callback
    */
-  onSubmit: (
-    username: string,
-    password: string,
-    remember?: boolean,
-    event?: React.FormEvent
-  ) => void;
+  onSubmit: (username: string, password: string, remember?: boolean) => void;
 
   /**
    * Forgot Password Callback
@@ -69,121 +65,169 @@ const LoginForm: FunctionComponent<LoginFormPropMap> = ({
   onSignUp,
   autoFocus,
 }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [remember, setRemember] = useState(false);
+  const methods = useForm();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = methods;
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    onSubmit(username, password, remember, event);
+  const handleFormSubmit = (data: FieldValues) => {
+    onSubmit(data.username, data.password, data.remember);
   };
 
   return (
-    <Grid container component="main" sx={{ height: '100vh' }}>
-      <Grid
-        item
-        xs={12}
-        sm={hero ? 8 : 12}
-        md={hero ? 5 : 12}
-        component={Paper}
-        elevation={6}
-        square
-      >
-        <Box
-          sx={{
-            my: hero ? 8 : 12,
-            mx: hero ? 4 : 12,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+    <FormProvider {...methods}>
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <Grid
+          item
+          xs={12}
+          sm={hero ? 8 : 12}
+          md={hero ? 5 : 12}
+          component={Paper}
+          elevation={6}
+          square
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            {header || 'Sign in'}
-          </Typography>
           <Box
-            component="form"
-            data-testid="login-form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 1 }}
+            sx={{
+              my: hero ? 8 : 12,
+              mx: hero ? 4 : 12,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
           >
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              inputProps={{ 'data-testid': 'username' }}
-              label="Username or Email"
-              name="username"
-              autoFocus={autoFocus !== false}
-              value={username}
-              onChange={({ target: { value } }) => setUsername(value)}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              inputProps={{ 'data-testid': 'password' }}
-              autoComplete="current-password"
-              value={password}
-              onChange={({ target: { value } }) => setPassword(value)}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  value="remember"
-                  data-testid="remember-me"
-                  color="primary"
-                  checked={remember}
-                  onChange={({ target: { checked } }) => setRemember(checked)}
-                />
-              }
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              data-testid="sign-in-button"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              {header || 'Sign in'}
+            </Typography>
+            <Box
+              component="form"
+              data-testid="login-form"
+              noValidate
+              onSubmit={handleSubmit(handleFormSubmit)}
+              sx={{ mt: 1 }}
             >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link
-                  href="#"
-                  variant="body2"
-                  data-testid="forgot-password"
-                  onClick={onForgotPassword}
-                >
-                  Forgot password?
-                </Link>
+              <Controller
+                name="username"
+                control={control}
+                rules={{
+                  required: 'Username or Email is required',
+                  pattern: {
+                    value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$|^[a-zA-Z0-9_]+$/,
+                    message: 'Invalid username or email',
+                  },
+                }}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="username"
+                    inputProps={{ 'data-testid': 'username' }}
+                    label="Username or Email"
+                    autoFocus={autoFocus !== false}
+                    error={!!errors.username}
+                    helperText={<>{errors.username?.message}</>}
+                  />
+                )}
+              />
+              <Controller
+                name="password"
+                control={control}
+                rules={{
+                  required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Password must be at least 6 characters',
+                  },
+                  validate: {
+                    hasUpperCase: (value) =>
+                      /[A-Z]/.test(value) || 'Password must contain at least 1 uppercase character',
+                    hasLowerCase: (value) =>
+                      /[a-z]/.test(value) || 'Password must contain at least 1 lowercase character',
+                    hasNumber: (value) =>
+                      /\d/.test(value) || 'Password must contain at least 1 number',
+                    hasSpecialChar: (value) =>
+                      /[!@#$%^&*(),.?":{}|<>]/.test(value) ||
+                      'Password must contain at least 1 special character',
+                  },
+                }}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    inputProps={{ 'data-testid': 'password' }}
+                    autoComplete="current-password"
+                    error={!!errors.password}
+                    helperText={<>{errors.password?.message}</>}
+                  />
+                )}
+              />
+              <Controller
+                name="remember"
+                control={control}
+                defaultValue={false}
+                render={({ field }) => (
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        {...field}
+                        value="remember"
+                        data-testid="remember-me"
+                        color="primary"
+                      />
+                    }
+                    label="Remember me"
+                  />
+                )}
+              />
+              <Button
+                type="submit"
+                data-testid="sign-in-button"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link
+                    href="#"
+                    variant="body2"
+                    data-testid="forgot-password"
+                    onClick={onForgotPassword}
+                  >
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2" data-testid="sign-up" onClick={onSignUp}>
+                    {"Don't have an account?"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2" data-testid="sign-up" onClick={onSignUp}>
-                  {"Don't have an account?"}
-                </Link>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ mt: 5 }} />
+              <Copyright sx={{ mt: 5 }} />
+            </Box>
           </Box>
-        </Box>
-      </Grid>
-      {hero && (
-        <Grid item xs={false} sm={4} md={7}>
-          <LoginHero image={hero} gradient={heroGradient} />
         </Grid>
-      )}
-    </Grid>
+        {hero && (
+          <Grid item xs={false} sm={4} md={7}>
+            <LoginHero image={hero} gradient={heroGradient} />
+          </Grid>
+        )}
+      </Grid>
+    </FormProvider>
   );
 };
 
