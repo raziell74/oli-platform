@@ -9,8 +9,6 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
-// const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
-
 type SplitButtonPropMap = {
   /**
    * Strings to display as options
